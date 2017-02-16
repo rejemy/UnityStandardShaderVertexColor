@@ -1,0 +1,5 @@
+*.meta
+Square.asset
+TestScene.unity
+VertColorMaterial.mat
+CreateTestMesh.cs
