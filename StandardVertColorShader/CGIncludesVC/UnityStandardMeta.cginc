@@ -54,7 +54,7 @@ float4 frag_meta (v2f_meta i) : SV_Target
 	#ifdef _PERVERTEXCOLOR_OFF
 	FragmentCommonData data = UNITY_SETUP_BRDF_INPUT (i.uv);
 	#else
-	FragmentCommonData data = UNITY_SETUP_BRDF_INPUT (i.uv, i.color);
+	FragmentCommonData data = UNITY_SETUP_BRDF_INPUT (i.uv, i.color.rgb);
 	#endif
 
 	UnityMetaInput o;

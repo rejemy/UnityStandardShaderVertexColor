@@ -144,12 +144,13 @@ Shader "Standard (Vercolor)"
 			#pragma shader_feature _ _ALPHATEST_ON _ALPHABLEND_ON _ALPHAPREMULTIPLY_ON
 			#pragma shader_feature _METALLICGLOSSMAP
 			#pragma shader_feature _PARALLAXMAP
+			#pragma shader_feature _ _PERVERTEXCOLOR_OFF
 			#pragma multi_compile_shadowcaster
 
 			#pragma vertex vertShadowCaster
 			#pragma fragment fragShadowCaster
 
-			#include "UnityStandardShadow.cginc"
+			#include "CGIncludesVC/UnityStandardShadow.cginc"
 
 			ENDCG
 		}
@@ -302,13 +303,14 @@ Shader "Standard (Vercolor)"
 
 			#pragma shader_feature _ _ALPHATEST_ON _ALPHABLEND_ON _ALPHAPREMULTIPLY_ON
 			#pragma shader_feature _METALLICGLOSSMAP
+			#pragma shader_feature _ _PERVERTEXCOLOR_OFF
 			#pragma skip_variants SHADOWS_SOFT
 			#pragma multi_compile_shadowcaster
 
 			#pragma vertex vertShadowCaster
 			#pragma fragment fragShadowCaster
 
-			#include "UnityStandardShadow.cginc"
+			#include "CGIncludesVC/UnityStandardShadow.cginc"
 
 			ENDCG
 		}

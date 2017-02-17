@@ -61,7 +61,7 @@ struct VertexInput
 	float2 uv0		: TEXCOORD0;
 	float2 uv1		: TEXCOORD1;
 #ifndef _PERVERTEXCOLOR_OFF
-	float4 color	: COLOR;
+	half4 color	: COLOR;
 #endif
 #if defined(DYNAMICLIGHTMAP_ON) || defined(UNITY_PASS_META)
 	float2 uv2		: TEXCOORD2;
@@ -88,12 +88,12 @@ half DetailMask(float2 uv)
 #ifdef _PERVERTEXCOLOR_OFF
 half3 Albedo(float4 texcoords)
 #else
-half3 Albedo(float4 texcoords, float4 vertColor)
+half3 Albedo(float4 texcoords, half3 vertColor)
 #endif
 {
 	half3 albedo = _Color.rgb * tex2D (_MainTex, texcoords.xy).rgb;
 	#ifndef _PERVERTEXCOLOR_OFF
-	albedo *= vertColor.rgb;
+	albedo *= vertColor;
 	#endif
 #if _DETAIL
 	#if (SHADER_TARGET < 30)
@@ -120,7 +120,7 @@ half3 Albedo(float4 texcoords, float4 vertColor)
 #ifdef _PERVERTEXCOLOR_OFF
 half Alpha(float2 uv)
 #else
-half Alpha(float2 uv, float4 vertColor)
+half Alpha(float2 uv, half vertAlpha)
 #endif
 {
 #if defined(_SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A)
@@ -129,7 +129,7 @@ half Alpha(float2 uv, float4 vertColor)
 	half a = tex2D(_MainTex, uv).a * _Color.a;
 #endif
 	#ifndef _PERVERTEXCOLOR_OFF
-	a *= vertColor.a;
+	a *= vertAlpha;
 	#endif
 	return a;
 }		

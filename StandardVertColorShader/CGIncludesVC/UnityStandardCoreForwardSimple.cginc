@@ -23,7 +23,7 @@ struct VertexOutputBaseSimple
 	half4 normalWorld					: TEXCOORD5; // w: fresnelTerm
 
 #ifndef _PERVERTEXCOLOR_OFF
-	float4 color						: COLOR;
+	half4 color							: COLOR;
 #endif
 
 #ifdef _NORMALMAP
@@ -132,7 +132,7 @@ FragmentCommonData FragmentSetupSimple(VertexOutputBaseSimple i)
 	#ifdef _PERVERTEXCOLOR_OFF
 	half alpha = Alpha(i.tex.xy);
 	#else
-	half alpha = Alpha(i.tex.xy, i.color);
+	half alpha = Alpha(i.tex.xy, i.color.a);
 	#endif
 
 	#if defined(_ALPHATEST_ON)
@@ -142,7 +142,7 @@ FragmentCommonData FragmentSetupSimple(VertexOutputBaseSimple i)
 	#ifdef _PERVERTEXCOLOR_OFF
 	FragmentCommonData s = UNITY_SETUP_BRDF_INPUT (i.tex);
 	#else
-	FragmentCommonData s = UNITY_SETUP_BRDF_INPUT (i.tex, i.color);
+	FragmentCommonData s = UNITY_SETUP_BRDF_INPUT (i.tex, i.color.rgb);
 	#endif
 
 	// NOTE: shader relies on pre-multiply alpha-blend (_SrcBlend = One, _DstBlend = OneMinusSrcAlpha)
@@ -251,7 +251,7 @@ struct VertexOutputForwardAddSimple
 	LIGHTING_COORDS(1,2)
 
 #ifndef _PERVERTEXCOLOR_OFF
-	float4 color						: COLOR;
+	half4 color							: COLOR;
 #endif
 
 #if !defined(_NORMALMAP) && SPECULAR_HIGHLIGHTS
@@ -326,7 +326,7 @@ FragmentCommonData FragmentSetupSimpleAdd(VertexOutputForwardAddSimple i)
 	#ifdef _PERVERTEXCOLOR_OFF
 	half alpha = Alpha(i.tex.xy);
 	#else
-	half alpha = Alpha(i.tex.xy, i.color);
+	half alpha = Alpha(i.tex.xy, i.color.a);
 	#endif
 
 	#if defined(_ALPHATEST_ON)
@@ -336,7 +336,7 @@ FragmentCommonData FragmentSetupSimpleAdd(VertexOutputForwardAddSimple i)
 	#ifdef _PERVERTEXCOLOR_OFF
 	FragmentCommonData s = UNITY_SETUP_BRDF_INPUT (i.tex);
 	#else
-	FragmentCommonData s = UNITY_SETUP_BRDF_INPUT (i.tex, i.color);
+	FragmentCommonData s = UNITY_SETUP_BRDF_INPUT (i.tex, i.color.rgb);
 	#endif
 
 	// NOTE: shader relies on pre-multiply alpha-blend (_SrcBlend = One, _DstBlend = OneMinusSrcAlpha)

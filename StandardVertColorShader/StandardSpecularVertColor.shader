@@ -120,7 +120,7 @@ Shader "Standard (Specular setup, Vercolor)"
 
 			#pragma vertex vertAdd
 			#pragma fragment fragAdd
-			#include "UnityStandardCoreForward.cginc"
+			#include "CGIncludesVC/UnityStandardCoreForward.cginc"
 
 			ENDCG
 		}
@@ -141,12 +141,13 @@ Shader "Standard (Specular setup, Vercolor)"
 			#pragma shader_feature _ _ALPHATEST_ON _ALPHABLEND_ON _ALPHAPREMULTIPLY_ON
 			#pragma shader_feature _SPECGLOSSMAP
 			#pragma shader_feature _PARALLAXMAP
+			#pragma shader_feature _ _PERVERTEXCOLOR_OFF
 			#pragma multi_compile_shadowcaster
 
 			#pragma vertex vertShadowCaster
 			#pragma fragment fragShadowCaster
 
-			#include "UnityStandardShadow.cginc"
+			#include "CGIncludesVC/UnityStandardShadow.cginc"
 
 			ENDCG
 		}
@@ -182,7 +183,7 @@ Shader "Standard (Specular setup, Vercolor)"
 			#pragma vertex vertDeferred
 			#pragma fragment fragDeferred
 
-			#include "UnityStandardCore.cginc"
+			#include "CGIncludesVC/UnityStandardCore.cginc"
 
 			ENDCG
 		}
@@ -207,7 +208,7 @@ Shader "Standard (Specular setup, Vercolor)"
 			#pragma shader_feature ___ _DETAIL_MULX2
 			#pragma shader_feature _ _PERVERTEXCOLOR_OFF
 			
-			#include "UnityStandardMeta.cginc"
+			#include "CGIncludesVC/UnityStandardMeta.cginc"
 			ENDCG
 		}
 	}
@@ -248,7 +249,7 @@ Shader "Standard (Specular setup, Vercolor)"
 
 			#pragma vertex vertBase
 			#pragma fragment fragBase
-			#include "UnityStandardCoreForward.cginc"
+			#include "CGIncludesVC/UnityStandardCoreForward.cginc"
 
 			ENDCG
 		}
@@ -281,7 +282,7 @@ Shader "Standard (Specular setup, Vercolor)"
 			
 			#pragma vertex vertAdd
 			#pragma fragment fragAdd
-			#include "UnityStandardCoreForward.cginc"
+			#include "CGIncludesVC/UnityStandardCoreForward.cginc"
 
 			ENDCG
 		}
@@ -298,13 +299,14 @@ Shader "Standard (Specular setup, Vercolor)"
 
 			#pragma shader_feature _ _ALPHATEST_ON _ALPHABLEND_ON _ALPHAPREMULTIPLY_ON
 			#pragma shader_feature _SPECGLOSSMAP
+			#pragma shader_feature _ _PERVERTEXCOLOR_OFF
 			#pragma skip_variants SHADOWS_SOFT
 			#pragma multi_compile_shadowcaster
 
 			#pragma vertex vertShadowCaster
 			#pragma fragment fragShadowCaster
 
-			#include "UnityStandardShadow.cginc"
+			#include "CGIncludesVC/UnityStandardShadow.cginc"
 
 			ENDCG
 		}
@@ -328,11 +330,11 @@ Shader "Standard (Specular setup, Vercolor)"
 			#pragma shader_feature ___ _DETAIL_MULX2
 			#pragma shader_feature _ _PERVERTEXCOLOR_OFF
 
-			#include "UnityStandardMeta.cginc"
+			#include "CGIncludesVC/UnityStandardMeta.cginc"
 			ENDCG
 		}
 	}
 
-	FallBack "VertexLit"
-	CustomEditor "StandardShaderGUI"
+	FallBack "VertexLitVertColor"
+	CustomEditor "StandardShaderVCGUI"
 }

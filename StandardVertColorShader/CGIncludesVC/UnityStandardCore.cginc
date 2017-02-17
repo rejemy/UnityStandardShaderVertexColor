@@ -206,7 +206,7 @@ struct FragmentCommonData
 #ifdef _PERVERTEXCOLOR_OFF
 inline FragmentCommonData SpecularSetup (float4 i_tex)
 #else
-inline FragmentCommonData SpecularSetup (float4 i_tex, float4 vertColor)
+inline FragmentCommonData SpecularSetup (float4 i_tex, half3 vertColor)
 #endif
 {
 	half4 specGloss = SpecularGloss(i_tex.xy);
@@ -232,7 +232,7 @@ inline FragmentCommonData SpecularSetup (float4 i_tex, float4 vertColor)
 #ifdef _PERVERTEXCOLOR_OFF
 inline FragmentCommonData MetallicSetup (float4 i_tex)
 #else
-inline FragmentCommonData MetallicSetup (float4 i_tex, float4 vertColor)
+inline FragmentCommonData MetallicSetup (float4 i_tex, half3 vertColor)
 #endif
 {
 	half2 metallicGloss = MetallicGloss(i_tex.xy);
@@ -259,7 +259,7 @@ inline FragmentCommonData MetallicSetup (float4 i_tex, float4 vertColor)
 #ifdef _PERVERTEXCOLOR_OFF
 inline FragmentCommonData FragmentSetup (float4 i_tex, half3 i_eyeVec, half3 i_viewDirForParallax, half4 tangentToWorld[3], half3 i_posWorld)
 #else
-inline FragmentCommonData FragmentSetup (float4 i_tex, half3 i_eyeVec, half3 i_viewDirForParallax, half4 tangentToWorld[3], half3 i_posWorld, float4 vertColor)
+inline FragmentCommonData FragmentSetup (float4 i_tex, half3 i_eyeVec, half3 i_viewDirForParallax, half4 tangentToWorld[3], half3 i_posWorld, half4 vertColor)
 #endif
 {
 	i_tex = Parallax(i_tex, i_viewDirForParallax);
@@ -267,7 +267,7 @@ inline FragmentCommonData FragmentSetup (float4 i_tex, half3 i_eyeVec, half3 i_v
 	#ifdef _PERVERTEXCOLOR_OFF
 	half alpha = Alpha(i_tex.xy);
 	#else
-	half alpha = Alpha(i_tex.xy, vertColor);
+	half alpha = Alpha(i_tex.xy, vertColor.a);
 	#endif
 	
 	#if defined(_ALPHATEST_ON)
@@ -277,7 +277,7 @@ inline FragmentCommonData FragmentSetup (float4 i_tex, half3 i_eyeVec, half3 i_v
 	#ifdef _PERVERTEXCOLOR_OFF
 	FragmentCommonData o = UNITY_SETUP_BRDF_INPUT (i_tex);
 	#else
-	FragmentCommonData o = UNITY_SETUP_BRDF_INPUT (i_tex, vertColor);
+	FragmentCommonData o = UNITY_SETUP_BRDF_INPUT (i_tex, vertColor.rgb);
 	#endif
 
 	o.normalWorld = PerPixelWorldNormal(i_tex, tangentToWorld);
@@ -391,7 +391,7 @@ struct VertexOutputForwardBase
 	UNITY_FOG_COORDS(7)
 
 #ifndef _PERVERTEXCOLOR_OFF
-	float4 color	: COLOR;
+	half4 color							: COLOR;
 #endif
 
 	// next ones would not fit into SM2.0 limits, but they are always for SM3.0+
@@ -503,7 +503,7 @@ struct VertexOutputForwardAdd
 	UNITY_FOG_COORDS(7)
 
 #ifndef _PERVERTEXCOLOR_OFF
-	float4 color	: COLOR;
+	half4 color							: COLOR;
 #endif
 
 	// next ones would not fit into SM2.0 limits, but they are always for SM3.0+
