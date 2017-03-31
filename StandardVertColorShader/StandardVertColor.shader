@@ -84,6 +84,7 @@ Shader "Standard (Vercolor)"
 
 			#pragma multi_compile_fwdbase
 			#pragma multi_compile_fog
+			#pragma multi_compile_instancing
 
 			#pragma vertex vertBase
 			#pragma fragment fragBase
@@ -146,6 +147,7 @@ Shader "Standard (Vercolor)"
 			#pragma shader_feature _PARALLAXMAP
 			#pragma shader_feature _ _PERVERTEXCOLOR_OFF
 			#pragma multi_compile_shadowcaster
+			#pragma multi_compile_instancing
 
 			#pragma vertex vertShadowCaster
 			#pragma fragment fragShadowCaster
@@ -178,10 +180,8 @@ Shader "Standard (Vercolor)"
 			#pragma shader_feature _PARALLAXMAP
 			#pragma shader_feature _ _PERVERTEXCOLOR_OFF
 
-			#pragma multi_compile ___ UNITY_HDR_ON
-			#pragma multi_compile ___ LIGHTMAP_ON
-			#pragma multi_compile ___ DIRLIGHTMAP_COMBINED DIRLIGHTMAP_SEPARATE
-			#pragma multi_compile ___ DYNAMICLIGHTMAP_ON
+			#pragma multi_compile_prepassfinal
+			#pragma multi_compile_instancing
 
 			#pragma vertex vertDeferred
 			#pragma fragment fragDeferred
@@ -209,6 +209,7 @@ Shader "Standard (Vercolor)"
 			#pragma shader_feature _METALLICGLOSSMAP
 			#pragma shader_feature _ _SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A
 			#pragma shader_feature ___ _DETAIL_MULX2
+			#pragma shader_feature EDITOR_VISUALIZATION
 			#pragma shader_feature _ _PERVERTEXCOLOR_OFF
 			
 			#include "CGIncludesVC/UnityStandardMeta.cginc"
@@ -245,7 +246,7 @@ Shader "Standard (Vercolor)"
 			// SM2.0: NOT SUPPORTED shader_feature ___ _DETAIL_MULX2
 			// SM2.0: NOT SUPPORTED shader_feature _PARALLAXMAP
 
-			#pragma skip_variants SHADOWS_SOFT DIRLIGHTMAP_COMBINED DIRLIGHTMAP_SEPARATE
+			#pragma skip_variants SHADOWS_SOFT DIRLIGHTMAP_COMBINED
 
 			#pragma multi_compile_fwdbase
 			#pragma multi_compile_fog
@@ -333,6 +334,7 @@ Shader "Standard (Vercolor)"
 			#pragma shader_feature _METALLICGLOSSMAP
 			#pragma shader_feature _ _SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A
 			#pragma shader_feature ___ _DETAIL_MULX2
+			#pragma shader_feature EDITOR_VISUALIZATION
 			#pragma shader_feature _ _PERVERTEXCOLOR_OFF
 
 			#include "CGIncludesVC/UnityStandardMeta.cginc"
